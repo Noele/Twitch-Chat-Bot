@@ -8,6 +8,13 @@ namespace Twitch_Bot.Structs
         private string _raw;
         private string _content;
         private string _channel;
+        private string _author;
+
+        public string Author
+        {
+            get => _author;
+        }
+
         private MessageType _messageType;
 
         public MessageType MessageType
@@ -47,14 +54,16 @@ namespace Twitch_Bot.Structs
                 }
 
                 _content = _content.Remove(0, 1);
-                _channel = messageData[0];
+                _channel = messageData[0].Remove(0, 1);
                 _messageType = MessageType.PRIVMSG;
+                _author = rawMessage.Substring(1, rawMessage.IndexOf("!") - 1);
             }
             else
             {
                 _messageType = MessageType.LOG;
                 _content = null;
                 _channel = null;
+                _author = null;
             }
         }
     }

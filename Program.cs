@@ -4,6 +4,7 @@ using Twitch_Bot.Commands;
 using Twitch_Bot.Commands.impl;
 using Twitch_Bot.Enums;
 using Twitch_Bot.Events;
+using Twitch_Bot.Handlers;
 
 namespace Twitch_Bot
 {
@@ -14,7 +15,7 @@ namespace Twitch_Bot
         private TwitchClient client;
         private async Task Start()
         {
-            client = new TwitchClient("userName", "prefix", "oAuth", "channel");
+            client = new TwitchClient("StylistGraphs", "!", @"oauth:wrkr336oq1airh47j9bpjaggyreuyk", "asmongold");
 
             var onMessageEvent = new OnMessageEvent();
             onMessageEvent.Register += onMessage;
@@ -30,11 +31,11 @@ namespace Twitch_Bot
             switch (args.message.MessageType)
             {
                 case MessageType.PRIVMSG:
-                    Console.WriteLine(args.message.Content);
+                    Console.WriteLine($"[{args.message.Channel}] {args.message.Author}: {args.message.Content}");
                     break;
                     
                 case MessageType.LOG:
-                    Console.WriteLine(args.message.Raw);
+                    //Console.WriteLine(args.message.Raw);
                     break;
             }
         }
